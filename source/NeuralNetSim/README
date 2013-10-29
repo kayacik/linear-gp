@@ -1,0 +1,8 @@
+NN DETECTOR
+============
+This "detector" takes a trained bottleneck NN (IW LW B1 B2) 
+and simulates the network with the formula:
+
+LW * tansig ( W1 * P + B1) + B2
+
+where P is the input.
