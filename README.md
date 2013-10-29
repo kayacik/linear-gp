@@ -12,7 +12,7 @@ Kayacik, H. G., Zincir-Heywood, A. N., Heywood, M. I., ["Can a Good Offense be a
 
 I have recently decided to tidy up the code a bit so that I can use it to generate other types of arms race in my academic research. I am especially interested in improving detection on mobile devices through an arms race.
 
-If you have any questions about the code, you can get in touch with me at _kayacik_ (at) _gmail_ (dot) _com_.
+If you have any questions about the code, you can get in touch with me at kayacik _(at)_ gmail _(dot)_ com.
 
 Running
 --------
@@ -20,7 +20,7 @@ Compile all the code with the following:
 
       make experiment
 
-This should create the executable syscall-experiment under /bin. It will also compile the anomaly detectors that will be used in the artificial arms race.
+This should create the executable syscall-experiment under bin/. It will also compile the anomaly detectors that will be used in the artificial arms race.
 
 Platforms
 ---------
