@@ -22,6 +22,13 @@ Compile all the code with the following:
 
 This should create the executable syscall-experiment under bin/. It will also compile the anomaly detectors that will be used in the artificial arms race.
 
+To run an experiment, change directory to bin and run the program as follows:
+	
+	cd bin/
+	./syscall-experiment 500 -1 5 10000 1 100 /tmp/gpfile 0.5 0.9 0.5 0 0 1 0 3 2 1 traceroute pH
+	
+This will start an arms race between the GP attacker and pH anomaly detector that is protecting traceroute. It will print out population characteristics every 100 tournaments. Mean_rawAnom shows the anomaly rate for the exploits for the population. It should slowly decrease as GP finds stealthier attacks. Note that this is an average computed over the population, best attacks tend to have substantially better stealth. Also note that it generally takes >10000 tournaments before the really good attacks emerge.
+
 Platforms
 ---------
 

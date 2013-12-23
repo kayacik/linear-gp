@@ -1,0 +1,7 @@
+1; gettimeofday; N/A; N/A;
+1; select; N/A; N/A;
+1; sendto; N/A; N/A;
+1; open; FileName.imms; N/A;
+1; close; FileName.imms; N/A;
+1; read; FileName.imms; Text.imms;
+1; write; FileName.imms; Text.imms;

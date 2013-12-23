@@ -1,0 +1,310 @@
+socket 
+sendto 
+open '/etc/passwd'
+ioctl 
+open '/tmp/dummy'
+uname 
+socket 
+mmap 
+close '/etc/passwd'
+mmap 
+fcntl 
+fstat 
+close '/tmp/dummy'
+write '/tmp/dummy', 'Hello'
+close '/tmp/dummy'
+connect 
+fstat 
+write '/tmp/dummy', 'Hello'
+mprotect 
+mmap 
+open '/tmp/dummy'
+recvfrom 
+brk 
+mprotect 
+ioctl 
+fstat 
+read '/etc/passwd', 'root::root:0:/bin/sh'
+write '/tmp/dummy', 'Hello'
+fstat 
+mmap 
+mmap 
+read '/etc/passwd', 'Hello'
+ioctl 
+mmap 
+sendto 
+ioctl 
+ioctl 
+open '/tmp/dummy'
+send 
+read '/etc/passwd', 'root::root:0:/bin/sh'
+gettimeofday 
+ioctl 
+close '/tmp/dummy'
+recvfrom 
+uname 
+read '/etc/passwd', 'root::root:0:/bin/sh'
+sendto 
+write '/tmp/dummy', 'Hello'
+connect 
+mmap 
+open '/tmp/dummy'
+open '/etc/passwd'
+open '/tmp/dummy'
+mprotect 
+poll 
+fstat 
+read '/etc/passwd', 'root::root:0:/bin/sh'
+fcntl 
+fstat 
+mmap 
+fstat 
+open '/etc/passwd'
+ioctl 
+mmap 
+ioctl 
+write '/tmp/dummy', 'Hello'
+fstat 
+mmap 
+mmap 
+socket 
+gettimeofday 
+mmap 
+send 
+poll 
+socket 
+gettimeofday 
+brk 
+close '/tmp/dummy'
+open '/etc/passwd'
+sendto 
+mprotect 
+mmap 
+fcntl 
+uname 
+poll 
+munmap 
+connect 
+fstat 
+write '/etc/passwd', 'root::root:0:/bin/sh'
+fcntl 
+fcntl 
+open '/tmp/dummy'
+select 
+mprotect 
+close '/etc/passwd'
+mmap 
+write '/etc/passwd', 'Hello'
+close '/etc/passwd'
+open '/etc/passwd'
+brk 
+fcntl 
+munmap 
+close '/tmp/dummy'
+open '/etc/passwd'
+close '/tmp/dummy'
+read '/etc/passwd', 'root::root:0:/bin/sh'
+fstat 
+write '/tmp/dummy', 'Hello'
+mprotect 
+mmap 
+fstat 
+open '/etc/passwd'
+ioctl 
+mmap 
+ioctl 
+munmap 
+fstat 
+mmap 
+mmap 
+socket 
+fstat 
+open '/etc/passwd'
+ioctl 
+close '/tmp/dummy'
+ioctl 
+open '/tmp/dummy'
+fstat 
+mmap 
+mmap 
+socket 
+write '/etc/passwd', 'root::root:0:/bin/sh'
+fcntl 
+munmap 
+mmap 
+mmap 
+fcntl 
+write '/tmp/dummy', 'Hello'
+close '/etc/passwd'
+open '/etc/passwd'
+poll 
+open '/etc/passwd'
+poll 
+gettimeofday 
+select 
+close '/etc/passwd'
+recvfrom 
+mmap 
+munmap 
+gettimeofday 
+gettimeofday 
+socket 
+munmap 
+open '/etc/passwd'
+fcntl 
+open '/tmp/dummy'
+uname 
+socket 
+ioctl 
+close '/etc/passwd'
+read '/etc/passwd', 'Hello'
+mmap 
+write '/tmp/dummy', 'Hello'
+write '/etc/passwd', 'root::root:0:/bin/sh'
+mmap 
+gettimeofday 
+ioctl 
+brk 
+read '/tmp/dummy', 'Hello'
+select 
+munmap 
+socket 
+munmap 
+select 
+write '/etc/passwd', 'root::root:0:/bin/sh'
+close '/etc/passwd'
+mprotect 
+ioctl 
+uname 
+munmap 
+fcntl 
+uname 
+mmap 
+ioctl 
+close '/etc/passwd'
+uname 
+write '/etc/passwd', 'root::root:0:/bin/sh'
+mprotect 
+recvfrom 
+recvfrom 
+close '/tmp/dummy'
+munmap 
+close '/etc/passwd'
+read '/etc/passwd', 'Hello'
+open '/etc/passwd'
+socket 
+munmap 
+send 
+read '/tmp/dummy', 'root::root:0:/bin/sh'
+fstat 
+brk 
+gettimeofday 
+fcntl 
+fcntl 
+gettimeofday 
+uname 
+write '/tmp/dummy', 'Hello'
+socket 
+recvfrom 
+fcntl 
+socket 
+write '/etc/passwd', 'root::root:0:/bin/sh'
+write '/etc/passwd', 'Hello'
+fstat 
+mprotect 
+uname 
+gettimeofday 
+write '/etc/passwd', 'Hello'
+open '/etc/passwd'
+send 
+poll 
+open '/tmp/dummy'
+fstat 
+brk 
+mprotect 
+ioctl 
+fstat 
+read '/etc/passwd', 'root::root:0:/bin/sh'
+open '/tmp/dummy'
+fstat 
+mmap 
+fcntl 
+open '/tmp/dummy'
+poll 
+mprotect 
+close '/etc/passwd'
+mmap 
+write '/etc/passwd', 'Hello'
+close '/etc/passwd'
+open '/etc/passwd'
+brk 
+open '/tmp/dummy'
+read '/tmp/dummy', 'Hello'
+mmap 
+sendto 
+close '/tmp/dummy'
+munmap 
+sendto 
+gettimeofday 
+fcntl 
+sendto 
+fcntl 
+open '/tmp/dummy'
+poll 
+mprotect 
+close '/etc/passwd'
+mmap 
+write '/etc/passwd', 'Hello'
+close '/etc/passwd'
+open '/etc/passwd'
+brk 
+write '/etc/passwd', 'Hello'
+fstat 
+fcntl 
+connect 
+send 
+open '/tmp/dummy'
+read '/etc/passwd', 'Hello'
+read '/tmp/dummy', 'root::root:0:/bin/sh'
+close '/etc/passwd'
+sendto 
+fcntl 
+open '/tmp/dummy'
+poll 
+mprotect 
+gettimeofday 
+mmap 
+write '/etc/passwd', 'Hello'
+close '/etc/passwd'
+open '/etc/passwd'
+brk 
+fcntl 
+uname 
+poll 
+mprotect 
+close '/etc/passwd'
+mmap 
+write '/etc/passwd', 'Hello'
+close '/etc/passwd'
+open '/tmp/dummy'
+brk 
+fcntl 
+munmap 
+close '/tmp/dummy'
+open '/etc/passwd'
+close '/tmp/dummy'
+read '/etc/passwd', 'root::root:0:/bin/sh'
+fstat 
+write '/tmp/dummy', 'Hello'
+mprotect 
+mmap 
+send 
+read '/tmp/dummy', 'root::root:0:/bin/sh'
+munmap 
+send 
+uname 
+fcntl 
+send 
+poll 
+gettimeofday 
+uname 

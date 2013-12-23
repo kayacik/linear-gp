@@ -1,0 +1,9 @@
+1; ADD; two-boxes.regs; two-boxes.regs;
+1; ADD; two-boxes.regs; two-boxes.imms;
+1; SUB; two-boxes.regs; two-boxes.regs;
+1; SUB; two-boxes.regs; two-boxes.imms;
+1; MUL; two-boxes.regs; two-boxes.regs;
+1; MUL; two-boxes.regs; two-boxes.imms;
+1; DIV; two-boxes.regs; two-boxes.regs;
+1; DIV; two-boxes.regs; two-boxes.imms;
+

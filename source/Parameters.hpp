@@ -22,7 +22,7 @@
 // The variables defined in this header are fixed for all experiments
 #ifndef PARAMETERS_HPP
 #define PARAMETERS_HPP
-const std::string PRMDIR = "params/";
+const std::string PRMDIR = "../instruction-sets/";
 /* On a G4 iMac the values below correspond to 
  * 4, 2, and 1 byte respectively 
  */

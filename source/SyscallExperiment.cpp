@@ -36,7 +36,7 @@
 struct rusage ruse;
 extern int getrusage();
 void documentation();
-#define NUM_ITER 1000
+#define NUM_ITER 100 // Was 1000 changed to 100 to have more visibility.
 #define TERMINATE_COUNT 10 // Terminate if the Rank PDF remains the same over 10 consecutive tournaments.
 #define MIN_ITERS_BEFORE_TERMINATE 5000 // Terminate if the Rank PDF remains the same (over ...) after 5000 tournaments
 ///////////////////////////////////////////////////////////////////
@@ -49,6 +49,7 @@ int main(int argc, char **argv)
 if (argc != 20)
 {		//                        1            2            3             4             5            6           7         8       9     10			 11			  12            13        14			  15		      16				17				18			19
 	cout<<"Usage: "<<argv[0]<<"<pop size> <page count> <page length> <iterations> <fitness type> <range> <output file> <p_mut> <p_xo> <p_swp> <greedy(1/0)> <runsstartfrom> <#runs> <enable OWC(1/0)> <XO_type(1..N)> <mut_type(1..N)> <swp_type(1..N)> <app_prefix> <detector_prefix>"<<endl;
+	cout<<"       "<<argv[0]<<" -h for more information."<<endl; 
 	if ( (argc == 2) && (string(argv[1]) == "-h") ) documentation();
 	exit(1);
 }
@@ -63,6 +64,7 @@ t0 = CPUTIME;
 // Experiment Run Starts Here									   *
 //******************************************************************
 configuration config; // this was supposed to contain all Population() parameters but I am not gonna do that...
+// Todo: Need to overhaul the parameter parsing. I don't need all these... 
 config.enable_owc = atoi(argv[14]);
 config.xo_type = atoi(argv[15]);
 config.mut_type = atoi(argv[16]);
@@ -74,13 +76,13 @@ int run_count = atoi(argv[13]);
 int do_greedysearch = atoi(argv[11]);
 int individualPDFneeded = 0;
 if ( (config.mut_type >6) && (config.mut_type <10)  ) individualPDFneeded = 1; // we need to recalculate ind PDFs
-if ( (do_greedysearch != 0) && (do_greedysearch != 1) ) { cout<<"Greedy param can be either 1 (enable) or 0 (disable)."<<endl; exit(1); }
+if ( (do_greedysearch != 0) && (do_greedysearch != 1) ) { cout<<"[ERROR] Greedy param can be either 1 (enable) or 0 (disable)."<<endl; exit(1); }
 for (int runs = run_start; runs < run_count; ++runs) // was 20
 {
 int fit_type = atoi(argv[5]);//was 1;
 int pop_size = atoi(argv[1]);//was 500;
-int page_count = atoi(argv[2]);//was 10;
-int page_size = atoi(argv[3]);//was 3;
+int page_count = atoi(argv[2]);//was 10,unused;
+int page_size = atoi(argv[3]);//was 3 still being used in Population(). NOTE: popsize = pagesize * l_range;
 long seed = runs*5+7;
 int tournament_size = 4;
 vector<double> mean_evade;
@@ -96,7 +98,7 @@ int terminate_now = 0; // this takes terminate and other variables into consider
 string run_ID = out_prog.substr(runidloc+1); // run id is the part that comes after the last '/'
 out_prog += ".";
 out_prog += my_itoa(runs);
-cout<<"Results will be written to "<<out_prog<< "(RunID : "<<run_ID<<")"<<endl;
+cout<<"[INFO] Results will be written to "<<out_prog<< " (RunID : "<<run_ID<<")"<<endl;
 // Note: .inst file should have a blank line at the end, or it seg faults
 string path = PRMDIR + prefix + ".inst";
 NumberGen numgen (seed);
@@ -110,10 +112,17 @@ if (detector == "pHmr")
 	create_pHmr_schema(out_prog, schema_file2, runs, page_size); // run this before the initialization of Population in case of pHmr
 	train_pHmr(schema_file1, string(dump_file + ".train").c_str(), prefix); // train pHmr with the new training schema
 }
-cout<<"Done!"<<endl;
+cout<<"=============================================================="<<endl;
+cout<<"Below, you will see the artificial arms race take place."<<endl;
+cout<<"Population starts with naive attacks and the mean raw anomaly"<<endl;
+cout<<"(Mean_rawAnom) will be high. As training continues, GP interacts"<<endl;
+cout<<"with the detector and discovers attachs with lower anomaly rates."<<endl;
+cout<<"You can see this by observing the anomaly rates."<<endl;
+cout<<"=============================================================="<<endl;
 Population myPop (pop_size, page_count, page_size, path, &numgen, fit_type, l_range, run_ID, config, prefix, tournament_size, detector);
 myPop.pareto_rank();
 ////// debug code
+cout<<"[INFO] Printing the initial population properties:"<<endl;
 cout<<"Id Length \tSuccess \tAnomaly \tDelay \tRank\n";
 for(int i=0;i<pop_size; ++i)
 {
@@ -133,7 +142,7 @@ for(int i=0;i<pop_size; ++i)
 
 
 
-if ( (tournament_size % 2) != 0 ) cout << "Warning: This training code assumes that tournament size is even." << endl;
+if ( (tournament_size % 2) != 0 ) cout << "[ERROR] This training code assumes that tournament size is even." << endl;
 int *tournament = new int[tournament_size];
 
 //******************************************************************
@@ -212,7 +221,7 @@ for (int i = 0; ((i < iterations) && !(terminate_now)) ; ++i)
 						myPop.blockXO(tournament[j], tournament[j + 1]);
 						break;
 					default:
-						cout<<"Warning: Illegal crossover selection, no crossover will be applied."<<endl;
+						cout<<"[ERROR] Illegal crossover selection, no crossover will be applied."<<endl;
 						break;
 				}					
 			if(individualPDFneeded) 
@@ -259,7 +268,7 @@ for (int i = 0; ((i < iterations) && !(terminate_now)) ; ++i)
 					myPop.instructionwiseMutation_ND_instFrq(tournament[j], P_mutation* ( (double)( (double)(iterations - i) / (double) iterations ) ), &(myPop.distros[tournament[j]]) );
 					break;
 				default:
-					cout<<"Warning: Illegal mutation selection, no mutation will be applied."<<endl;
+					cout<<"[ERROR] Illegal mutation selection, no mutation will be applied."<<endl;
 					break;
 				}
 			if(individualPDFneeded) myPop.updatePDF(tournament[j]);
@@ -282,7 +291,7 @@ for (int i = 0; ((i < iterations) && !(terminate_now)) ; ++i)
 						myPop.swapMutation_ND(tournament[j]);
 						break;
 					default:
-					cout<<"Warning: Illegal swap selection, no swap will be applied."<<endl;
+					cout<<"[ERROR] Illegal swap selection, no swap will be applied."<<endl;
 					break;
 					}
 			}
@@ -334,32 +343,34 @@ if (detector == "pHmr")
 //*************************************
 t1 = CPUTIME;
 time(&u2);
-cout<<"CPU time = "<< t1-t0 << " secs.\nUser Time = "<<(int)(u2-u1)<<" secs.\n";
+cout<<"[INFO] CPU time = "<< t1-t0 << " secs.\nUser Time = "<<(int)(u2-u1)<<" secs.\n";
 return 0;
 }
 
 void documentation()
 {
-char str[] = "A linear GP implementation. The required parameters are as follows\n\n"
-			 " - POP SIZE : Population size.\n"
-			 " - PAGE COUNT : Number of pages in an individual (not in use). \n"
-			 " - PAGE LENGTH: Number of instructions in a page (not in use). \n"
-			 " - NO. OF ITERATIONS : Number of tournaments. \n"
-			 " - FITNESS TYPE : Fitness function to be used. 1 for incremental, 2 for concurrent and 3 for bypassing the validity check. \n"
-			 " - RANGE : Maximum number of instructions allowed in an individual during initialization. \n"
-			 " - OUTPUT FILE : Output file prefix \n"
-			 " - PROB OF MUTATION : Probability of mutation, some mutations exchange more material so set it carefully. \n"
-			 " - PROB OF CROSSOVER : Probability of crossover. \n"
-			 " - PROB OF SWAP : Probability of swap. \n"
-			 " - GREEDY : Apply greedy search operator? 1 yes, 0 no. \n"
-			 " - RUN STARTS FROM : Determine the seed for random number generator. Use if your run got interrupted and don't want to start over. \n"
-			 " - NO. OF RUNS : Number of runs. \n"
-			 " - ENABLE OWC : Seed all individuals with OWC during initialization? 1 yes, 0 no. \n"
-			 " - CROSSOVER TYPE : Crossover type \n"
-			 " - MUTATION TYPE : Mutation type \n"
-			 " - SWAP TYPE: Swap type \n"
-			 " - APPLICATION: Which application to run GP on. Choices are traceroute, ftp, restore or samba.  "
-			 " - DETECTOR: Which detector to run GP against. Choices are stide, pH, pHmr, hmm or svm (case sensitive).  ";
+char str[] = "[INFO] A linear GP implementation. The required parameters are as follows\n\n"
+			 "   - POP SIZE : Population size. (default: 500)\n"
+			 "   - PAGE COUNT : Number of pages in an individual (not in use, default: -1). \n"
+			 "   - PAGE LENGTH: Number of instructions in a page (not in use, default: -1). \n"
+			 "   - NO. OF ITERATIONS : Number of tournaments. (default: [10000,50000], less for quicker runs) \n"
+			 "   - FITNESS TYPE : Fitness function to be used. 1 for incremental, 2 for concurrent and 3 for bypassing the validity check. (default: 1) \n"
+			 "   - RANGE : Maximum number of instructions allowed in an individual during initialization. (default: [100,500]) \n"
+			 "   - OUTPUT FILE : Output file prefix \n"
+			 "   - PROB OF MUTATION : Probability of mutation, some mutations exchange more material so set it carefully. (default: 0.5)\n"
+			 "   - PROB OF CROSSOVER : Probability of crossover. (default: 0.9) \n"
+			 "   - PROB OF SWAP : Probability of swap. (default: 0.5)\n"
+			 "   - GREEDY : Apply greedy search operator? 1 yes, 0 no. (default: 0)\n"
+			 "   - RUN STARTS FROM : Determine the seed for random number generator. Use if your run got interrupted and don't want to start over. (default: 0)\n"
+			 "   - NO. OF RUNS : Number of runs. (default: 1, >1 if you are computing stats over many runs.) \n"
+			 "   - ENABLE OWC : Seed all individuals with OWC during initialization? 1 yes, 0 no. (default: 0, 1 for quicker convergence) \n"
+			 "   - CROSSOVER TYPE : Crossover type (default: 1)\n"
+			 "   - MUTATION TYPE : Mutation type (default: 1)\n"
+			 "   - SWAP TYPE: Swap type (default: 1)\n"
+			 "   - APPLICATION: Which application to run GP on. Choices are traceroute, ftp, restore or samba. \n "
+			 "   - DETECTOR: Which detector to run GP against. Choices are stide, pH, pHmr, hmm or svm (case sensitive).  \n"
+			 "   E.g. ./syscall-experiment 500 -1 5 10000 1 100 /tmp/gpfile 0.5 0.9 0.5 0 0 1 0 3 2 1 traceroute pH\n"
+			 "   E.g. ./syscall-experiment 500 -1 5 10000 1 100 /tmp/gpfile 0.5 0.9 0.5 0 0 1 1 3 2 1 traceroute pH (turns on OWC)";
 cout<<str<<endl;
 
 

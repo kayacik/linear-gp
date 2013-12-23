@@ -159,7 +159,8 @@ Population::Population(int indsize, int pgnum, int pgsize, string decoparam, Num
 	
 	fitness_fn = fit_type; //default if you want 2 change it from main() by adding myPop.fitness_fn = 2;
 	// read in the vector
-	ifstream fin (string("Stide/"+app_prefix+".enum").c_str());
+	ifstream fin (string("../resources/pH/"+app_prefix+".enum").c_str());
+	assert(fin);
 	string line="";
 	char ch;
 	while (fin.get(ch))
@@ -192,7 +193,7 @@ Population::Population(int indsize, int pgnum, int pgsize, string decoparam, Num
 		}
 	}
 	if ((OPEN == -1) || (CLOSE == -1) || (WRITE == -1)) 
-		cout<<"Error: OWC initialization is enabled but I can't find one or more in the instruction set."<<endl;
+		cout<<"[INFO] OWC not found. This is normal if OWC initialization is not selected."<<endl;
 	
 	for(int i=0; i<(popsize + overflow); ++i)
 	{
@@ -241,6 +242,7 @@ Population::Population(int indsize, int pgnum, int pgsize, string decoparam, Num
 	pareto_rank();
 	// create the initial selection PDF
 	update_selectionPDF();
+	cout<<"Finished initializing Population object."<<endl;
 };
 
 
@@ -1200,7 +1202,7 @@ double Population::calculateAnomaly_withoutPreamble_pH(int ind)
 	double delay = 0; // in the future you might need to return this
 	//cout<<"calculating..."<<endl;
 	string phen = print_individual(ind);
-	string run_id = "pH/" + runID;
+	string run_id = "../resources/pH/" + runID;
 	ofstream fout(run_id.c_str());
 	fout<<phen.c_str();//phen;
 	fout.close();
@@ -1213,10 +1215,10 @@ double Population::calculateAnomaly_withoutPreamble_pH(int ind)
 	double arate = 100; // worst case scenario
 	char *t_arg2 = new char[run_id.size() + 1];
 	strcpy(t_arg2,run_id.c_str());
-	process_strace((char*)string("pH/"+app_prefix+".enum").c_str(), t_arg2);
+	process_strace((char*)string("../resources/pH/"+app_prefix+".enum").c_str(), t_arg2);
 	delete[] t_arg2;
 	// note that below,  <win_size (9)> <delay factor (1)> <tolerize_lim (12)> <anomaly_lim (30)> <suspend_execve (10)> <suspend_execve_time (172800)> <lfc 128>
-	string command2 = "./pH/pH  pH/"+app_prefix+".db  "+run_id+".processed  9 1 12 30 10 172800 128 > "+run_id+".outcome";
+	string command2 = "./pH  ../resources/pH/"+app_prefix+".db  "+run_id+".processed  9 1 12 30 10 172800 128 > "+run_id+".outcome";
 	system(command2.c_str());
 	// now process .outcome file
 	string fin_file = run_id+".outcome"; 
@@ -2171,7 +2173,7 @@ double Population::calc_fitness_pH(int ind, double &anomrate, double &success, d
 {
 	//cout<<"calculating..."<<endl;
 	string phen = print_individual(ind);
-	string run_id = "pH/" + runID;
+	string run_id = "../resources/pH/" + runID;
 	ofstream fout(run_id.c_str());
 	fout<<phen.c_str();//phen;
 	fout.close();
@@ -2184,10 +2186,10 @@ double Population::calc_fitness_pH(int ind, double &anomrate, double &success, d
 	double arate = 100; // worst case scenario
 	char *t_arg2 = new char[run_id.size() + 1];
 	strcpy(t_arg2,run_id.c_str());
-	process_strace((char*)string("pH/"+app_prefix+".enum").c_str(), t_arg2);
+	process_strace((char*)string("../resources/pH/"+app_prefix+".enum").c_str(), t_arg2);
 	delete[] t_arg2;
 	// note that below,  <win_size (9)> <delay factor (1)> <tolerize_lim (12)> <anomaly_lim (30)> <suspend_execve (10)> <suspend_execve_time (172800)> <lfc 128>
-	string command2 = "./pH/pH  pH/"+app_prefix+".db  "+run_id+".processed2  9 1 12 30 10 172800 128 > "+run_id+".outcome";
+	string command2 = "./pH  ../resources/pH/"+app_prefix+".db  "+run_id+".processed2  9 1 12 30 10 172800 128 > "+run_id+".outcome";
 	system(command2.c_str());
 	// now process .outcome file
 	string fin_file = run_id+".outcome"; 
@@ -2951,6 +2953,8 @@ double Population::calc_fitness_pHmr2(string phen, string db, double &anomrate, 
 
 void Population::process_strace(char *argv1, char *argv2)
 {
+	//cout<< argv1<<endl;
+	//cout<< argv2<<endl;
 	char ch;
 	string line;
 	ifstream fin2 (argv2);
@@ -3052,7 +3056,7 @@ void Population::process_strace(char *argv1, char *argv2)
 	// if you disable this uncomment the following:
 	// string command_pre2 = "cp  Stide/test.prog.processed  Stide/test.prog.processed2";
 	string run_id(argv2);
-	string command_pre2 = "cat Stide/"+app_prefix+".pre "+run_id+".processed > "+run_id+".processed2";
+	string command_pre2 = "cat ../resources/pH/"+app_prefix+".pre "+run_id+".processed > "+run_id+".processed2";
 	system(command_pre2.c_str());
 	
 	//fout2.close();
