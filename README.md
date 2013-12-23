@@ -29,6 +29,10 @@ To run an experiment, change directory to bin and run the program as follows:
 	
 This will start an arms race between the GP attacker and pH anomaly detector that is protecting traceroute. It will print out population characteristics every 100 tournaments. Mean_rawAnom shows the anomaly rate for the exploits for the population. It should slowly decrease as GP finds stealthier attacks. Note that this is an average computed over the population, best attacks tend to have substantially better stealth. Also note that it generally takes >10000 tournaments before the really good attacks emerge.
 
+More information on the rather long list of parameters that syscall-experiment excepts can be found by:
+
+	./syscall-experiment -h
+
 Platforms
 ---------
 
