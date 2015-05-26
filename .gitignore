@@ -15,3 +15,11 @@ resources/pH/gpfile.outcome
 resources/pH/gpfile.processed
 
 resources/pH/gpfile.processed2
+
+resources/pH/gpfile
+
+*.outcome
+
+*.processed
+
+*.processed2
