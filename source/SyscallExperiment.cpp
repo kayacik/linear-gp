@@ -80,7 +80,7 @@ if ( (do_greedysearch != 0) && (do_greedysearch != 1) ) { cout<<"[ERROR] Greedy 
 for (int runs = run_start; runs < run_count; ++runs) // was 20
 {
 int fit_type = atoi(argv[5]);//was 1;
-int pop_size = atoi(argv[1]);//was 500;
+int pop_size = POP_SIZE; // was atoi(argv[1]);//was 500;
 int page_count = atoi(argv[2]);//was 10,unused;
 int page_size = atoi(argv[3]);//was 3 still being used in Population(). NOTE: popsize = pagesize * l_range;
 long seed = runs*5+7;
@@ -350,7 +350,7 @@ return 0;
 void documentation()
 {
 char str[] = "[INFO] A linear GP implementation. The required parameters are as follows\n\n"
-			 "   - POP SIZE : Population size. (default: 500)\n"
+			 "   - POP SIZE : Population size. (default: 500) -- Note: This is hardcoded to 500 at the moment.\n"
 			 "   - PAGE COUNT : Number of pages in an individual (not in use, default: -1). \n"
 			 "   - PAGE LENGTH: Number of instructions in a page (not in use, default: -1). \n"
 			 "   - NO. OF ITERATIONS : Number of tournaments. (default: [10000,50000], less for quicker runs) \n"
