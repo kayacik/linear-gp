@@ -37,10 +37,6 @@
 #include "ProbabilityDistro.hpp"
 #include "asmRuntime/RuntimeFitness.hpp"
 
-// The vector initialization had problems. Setting population size to 500 here for now. 
-// This is not critical for now since 500 seemed to work reasonably well.
-#define POP_SIZE 500
-
 using namespace std;
 
 class Population

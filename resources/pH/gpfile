@@ -1,364 +1,246 @@
-mmap 
-brk 
+socket 
+recvfrom 
+gettimeofday 
 mprotect 
 brk 
-send 
+sendto 
 read '/tmp/dummy', 'Hello'
-open '/tmp/dummy'
-socket 
-brk 
-close '/etc/passwd'
-recvfrom 
-munmap 
-mprotect 
-gettimeofday 
-connect 
-select 
+ioctl 
 write '/etc/passwd', 'Hello'
-poll 
-select 
-mmap 
-read '/tmp/dummy', 'Hello'
-write '/etc/passwd', 'Hello'
-munmap 
 brk 
-mmap 
-write '/tmp/dummy', 'Hello'
-recvfrom 
-munmap 
-socket 
-brk 
-gettimeofday 
-brk 
-send 
-uname 
-close '/etc/passwd'
-munmap 
-select 
-munmap 
-uname 
-fcntl 
-socket 
-munmap 
-socket 
+sendto 
 poll 
-fstat 
-write '/etc/passwd', 'root::root:0:/bin/sh'
-gettimeofday 
-poll 
-poll 
-mprotect 
-poll 
-brk 
-mprotect 
-connect 
-poll 
-close '/etc/passwd'
-gettimeofday 
-fstat 
-brk 
-write '/tmp/dummy', 'Hello'
-recvfrom 
+ioctl 
 write '/tmp/dummy', 'root::root:0:/bin/sh'
+brk 
+munmap 
+gettimeofday 
+uname 
+recvfrom 
+recvfrom 
+connect 
+mmap 
+write '/etc/passwd', 'Hello'
+socket 
+write '/tmp/dummy', 'root::root:0:/bin/sh'
+write '/etc/passwd', 'Hello'
+fstat 
+select 
+recvfrom 
+gettimeofday 
+fstat 
+recvfrom 
+fcntl 
+close '/tmp/dummy'
+uname 
+poll 
+gettimeofday 
+uname 
+uname 
 open '/etc/passwd'
-fcntl 
+sendto 
+mprotect 
+write '/etc/passwd', 'Hello'
+connect 
+recvfrom 
+connect 
+poll 
 fstat 
+write '/etc/passwd', 'root::root:0:/bin/sh'
+uname 
+recvfrom 
+send 
+mmap 
+uname 
 write '/tmp/dummy', 'Hello'
-uname 
-select 
-open '/tmp/dummy'
-gettimeofday 
-close '/tmp/dummy'
-mmap 
-close '/tmp/dummy'
-close '/tmp/dummy'
-mmap 
-sendto 
-select 
-write '/etc/passwd', 'root::root:0:/bin/sh'
-socket 
-socket 
-select 
-mmap 
-connect 
-close '/etc/passwd'
-fstat 
-select 
-ioctl 
-write '/tmp/dummy', 'root::root:0:/bin/sh'
-connect 
-connect 
-munmap 
-write '/tmp/dummy', 'root::root:0:/bin/sh'
-ioctl 
-recvfrom 
-close '/etc/passwd'
-brk 
-gettimeofday 
-close '/etc/passwd'
-mprotect 
-fstat 
-send 
-close '/tmp/dummy'
-close '/tmp/dummy'
-uname 
-fstat 
-munmap 
-mprotect 
-fcntl 
-open '/tmp/dummy'
-gettimeofday 
-socket 
-munmap 
-ioctl 
-ioctl 
-brk 
-read '/tmp/dummy', 'root::root:0:/bin/sh'
-uname 
-read '/tmp/dummy', 'Hello'
-ioctl 
-connect 
-socket 
-munmap 
-connect 
 poll 
-close '/etc/passwd'
-gettimeofday 
-read '/tmp/dummy', 'root::root:0:/bin/sh'
-write '/tmp/dummy', 'root::root:0:/bin/sh'
-read '/tmp/dummy', 'Hello'
-poll 
-connect 
 brk 
-fcntl 
-ioctl 
-sendto 
+select 
+open '/etc/passwd'
 gettimeofday 
-open '/tmp/dummy'
-send 
 mprotect 
+select 
 sendto 
-munmap 
-open '/tmp/dummy'
-gettimeofday 
+write '/tmp/dummy', 'root::root:0:/bin/sh'
 send 
-mmap 
-write '/etc/passwd', 'root::root:0:/bin/sh'
-open '/tmp/dummy'
-close '/tmp/dummy'
-brk 
-mmap 
-socket 
 recvfrom 
-fcntl 
-ioctl 
-brk 
 munmap 
-brk 
-read '/tmp/dummy', 'Hello'
-socket 
-mmap 
 close '/etc/passwd'
-fcntl 
-brk 
-socket 
-socket 
-read '/tmp/dummy', 'root::root:0:/bin/sh'
-write '/tmp/dummy', 'root::root:0:/bin/sh'
-fcntl 
-send 
+connect 
 recvfrom 
-uname 
-fstat 
-munmap 
-write '/tmp/dummy', 'root::root:0:/bin/sh'
-munmap 
-mmap 
+brk 
+gettimeofday 
+sendto 
+open '/tmp/dummy'
+select 
+gettimeofday 
+recvfrom 
+ioctl 
+ioctl 
 read '/etc/passwd', 'Hello'
-ioctl 
-ioctl 
-read '/tmp/dummy', 'root::root:0:/bin/sh'
-write '/etc/passwd', 'root::root:0:/bin/sh'
-munmap 
-close '/tmp/dummy'
-fstat 
-send 
-close '/tmp/dummy'
-fcntl 
-select 
-poll 
-brk 
-mmap 
-send 
-mprotect 
-open '/tmp/dummy'
-read '/tmp/dummy', 'Hello'
-fstat 
-close '/etc/passwd'
-ioctl 
-munmap 
-brk 
-socket 
-poll 
-mmap 
-fcntl 
-open '/tmp/dummy'
-mmap 
-brk 
-recvfrom 
-fcntl 
-gettimeofday 
-select 
-fcntl 
-recvfrom 
 uname 
-fstat 
-close '/tmp/dummy'
-select 
-recvfrom 
-munmap 
+close '/etc/passwd'
 gettimeofday 
 socket 
-munmap 
-open '/tmp/dummy'
+mmap 
 socket 
-brk 
-ioctl 
-write '/etc/passwd', 'root::root:0:/bin/sh'
-ioctl 
+fcntl 
+uname 
+gettimeofday 
 socket 
 connect 
-send 
-mmap 
-fstat 
-fstat 
-uname 
-send 
-gettimeofday 
-uname 
-mmap 
-mprotect 
-connect 
-mmap 
-open '/tmp/dummy'
-open '/tmp/dummy'
-send 
-fcntl 
-socket 
-select 
-recvfrom 
-gettimeofday 
-mmap 
-poll 
-mprotect 
-uname 
-munmap 
-mmap 
-mmap 
-close '/etc/passwd'
-poll 
-munmap 
-munmap 
-ioctl 
 open '/etc/passwd'
-fstat 
-recvfrom 
-munmap 
-uname 
-write '/tmp/dummy', 'Hello'
-connect 
-send 
-socket 
-munmap 
+poll 
+mprotect 
+open '/etc/passwd'
+poll 
 select 
-read '/etc/passwd', 'root::root:0:/bin/sh'
-send 
-mprotect 
-fstat 
-fstat 
-mprotect 
-brk 
-mmap 
-mmap 
-read '/tmp/dummy', 'Hello'
+write '/tmp/dummy', 'root::root:0:/bin/sh'
 munmap 
-ioctl 
+poll 
+fcntl 
+fcntl 
+sendto 
+sendto 
 mprotect 
+socket 
+open '/etc/passwd'
+munmap 
+fstat 
+write '/etc/passwd', 'root::root:0:/bin/sh'
+munmap 
+close '/etc/passwd'
+brk 
+close '/tmp/dummy'
 send 
+poll 
+poll 
 mprotect 
 connect 
+gettimeofday 
+open '/tmp/dummy'
+sendto 
+recvfrom 
 mprotect 
+open '/etc/passwd'
+connect 
+connect 
+brk 
+sendto 
+read '/etc/passwd', 'Hello'
+munmap 
+send 
+poll 
+sendto 
+send 
+munmap 
+socket 
+send 
+send 
 fstat 
-mmap 
-fcntl 
-fcntl 
+write '/etc/passwd', 'Hello'
 socket 
 write '/tmp/dummy', 'root::root:0:/bin/sh'
-read '/tmp/dummy', 'Hello'
-sendto 
-socket 
-sendto 
-connect 
-gettimeofday 
-connect 
-uname 
-gettimeofday 
 brk 
-fstat 
-send 
-send 
-fstat 
-poll 
-close '/tmp/dummy'
-mmap 
-mmap 
-fcntl 
-sendto 
-munmap 
-close '/tmp/dummy'
-close '/tmp/dummy'
-fstat 
-uname 
-select 
-select 
-open '/etc/passwd'
-recvfrom 
-open '/etc/passwd'
-uname 
-ioctl 
-fcntl 
-fcntl 
-ioctl 
-close '/tmp/dummy'
-write '/tmp/dummy', 'Hello'
-mmap 
-poll 
 gettimeofday 
-socket 
+open '/etc/passwd'
+open '/tmp/dummy'
+mmap 
+read '/tmp/dummy', 'Hello'
+fstat 
+send 
+ioctl 
+read '/tmp/dummy', 'Hello'
+send 
+brk 
+send 
+close '/etc/passwd'
+poll 
+uname 
+fcntl 
+mprotect 
+mmap 
+brk 
+fcntl 
+uname 
+fstat 
 read '/tmp/dummy', 'root::root:0:/bin/sh'
-sendto 
-select 
+gettimeofday 
+open '/etc/passwd'
+fcntl 
+uname 
 mmap 
-ioctl 
-recvfrom 
-recvfrom 
+munmap 
 gettimeofday 
+select 
+poll 
+fcntl 
+munmap 
+read '/etc/passwd', 'Hello'
+fcntl 
+poll 
 gettimeofday 
+poll 
+socket 
+fcntl 
+poll 
+recvfrom 
+connect 
+recvfrom 
+uname 
+sendto 
+uname 
+connect 
+fstat 
 munmap 
 poll 
+close '/tmp/dummy'
+ioctl 
+open '/etc/passwd'
+read '/tmp/dummy', 'Hello'
+write '/tmp/dummy', 'Hello'
+ioctl 
+fcntl 
+fcntl 
+poll 
+mmap 
+sendto 
 poll 
 ioctl 
-write '/etc/passwd', 'root::root:0:/bin/sh'
+uname 
+select 
+brk 
+open '/etc/passwd'
+mprotect 
+ioctl 
+mprotect 
+ioctl 
+send 
+ioctl 
+open '/etc/passwd'
+gettimeofday 
+write '/tmp/dummy', 'root::root:0:/bin/sh'
+munmap 
+recvfrom 
+mmap 
+close '/etc/passwd'
+fstat 
+open '/etc/passwd'
+uname 
+poll 
 socket 
 mprotect 
-poll 
-gettimeofday 
-ioctl 
-close '/tmp/dummy'
-send 
-send 
-recvfrom 
-open '/tmp/dummy'
-recvfrom 
+write '/etc/passwd', 'Hello'
 select 
-gettimeofday 
+send 
+send 
+read '/etc/passwd', 'Hello'
+sendto 
+poll 
+send 
+close '/etc/passwd'
+uname 
+send 
+recvfrom 
+mprotect 
+brk 

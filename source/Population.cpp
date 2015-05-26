@@ -26,6 +26,84 @@
 Population::Population() { };
 
 /***********************************************************
+ * --- RETIRED ---
+ * Passing *d screws up the desctructor, therefore this 
+ * constructor is "retired".
+Population::Population(int indsize, int pgnum, int pgsize, Decoder *d, NumberGen *ng) 
+{ 
+	population = new BYTE4[indsize*pgsize*pgnum];
+	fitness = new double[indsize];
+	assert(population); assert(fitness);
+	pagesize = pgsize;
+	numpages = pgnum;
+	popsize = indsize;
+	decoder = d;
+	number = ng; 
+	decoder->NUMG = number;
+	for(int i=0; i<popsize*numpages*pagesize; ++i)
+		population[i] = decoder->random_instruction();
+	for(int i=0; i<popsize; ++i)
+		fitness[i] = calculateFitness(i);
+};
+/
+/***********************************************************
+ * --- RETIRED ---
+ * Main constructor
+ *
+Population::Population(int indsize, int pgnum, int pgsize, string decoparam, NumberGen *ng, int l_range) // DONT USE FOR NOW
+{
+	pagesize = pgsize;
+	numpages = pgnum;
+	popsize = indsize;
+	number = ng;
+	range = l_range;
+	fitness = new double[indsize];
+	anomaly = new double[indsize];
+	length = new int[indsize];
+	population = new BYTE4 * [popsize];
+	for (int i=0; i < popsize; ++i)
+	{
+		int i_size = number->uniform_intgen(1, range);
+		population[i] = new BYTE4[i_size];
+		assert(population[i]);
+		length[i] = i_size;
+	}
+	
+	
+	  
+	
+	assert(population); assert(fitness); assert(anomaly);assert(length);
+	
+	
+	fitness_fn = 1; //default if you want 2 change it from main() by adding myPop.fitness_fn = 2;
+	// read in the vector
+	ifstream fin ("strace.enum");
+	string line="";
+	char ch;
+	while (fin.get(ch))
+	{
+		if(( ch !='\n') && ( ch !='\r'))
+			line+= ch;
+		else // process the line
+		{
+			syscalls.push_back(line);
+			line = "";
+		}
+	}
+	fin.close();
+
+	//
+	//decoder = new Decoder(decoparam);
+	//decoder->NUMG = number;
+	//for(int i=0; i<popsize*numpages*pagesize; ++i)
+	//	population[i] = decoder->random_instruction();
+	//for(int i=0; i<popsize; ++i)
+	//	calculateFitness(i);
+	//
+};
+*/
+
+/***********************************************************
  * Main constructor with fitness function select option
  * This is the contructor that needs to be used
  */
@@ -46,7 +124,7 @@ Population::Population(int indsize, int pgnum, int pgsize, string decoparam, Num
 	MAX_IND_LEN = 1000;
 	pagesize = pgsize;
 	numpages = pgnum; // "retired"
-	popsize = POP_SIZE;
+	popsize = indsize;
 	number = ng;
 	range = l_range;
 	runID = run_ID;
@@ -2996,7 +3074,110 @@ int Population::check_valid(int ind)
 	//cout<<pst<<endl;
 	int stages[] = {-1, -1, -1};
 	find_OWC(ind, &stages[0], &stages[1], &stages[2]);
-
+	/*
+	
+	// find the first open /etc/passwd, last close /etc/passwd and a write in between
+	// Maybe parameters should be optional
+	////////////////////////////////////////////////////
+	// SEARCH LOOP 1: Find the first open and last close
+	int idx1 = 0;
+	int idx2 = pst.find ("\n", idx1);
+	string token;
+	int line = 0;
+	while (idx2 != string::npos)
+	{
+		token = pst.substr(idx1, idx2 - idx1);
+		//cout<<token<<endl;
+		
+		if(token.find("open") != string::npos)
+		{
+			if (CHECK_PARAMS && token.find("/etc/passwd"))
+			{
+				if (stages[0] == -1) stages[0] = line; 
+			}
+			else
+			{
+				if (stages[0] == -1) stages[0] = line;
+			}
+		}
+		if(token.find("close") != string::npos)
+		{
+			if (CHECK_PARAMS && token.find("/etc/passwd"))
+			{
+				if (stages[2] < line ) stages[2] = line; 
+			}
+			else
+			{
+				if (stages[2] < line ) stages[2] = line; 
+			}
+			
+		}
+		idx1 = idx2 + 1;
+		idx2 = pst.find ("\n", idx1);
+		line++;
+	}
+	idx1 = 0;
+	idx2 = pst.find ("\n", idx1);
+	token = "";
+	line = 0;
+	////////////////////////////////////////////////////
+	// SEARCH LOOP 2: Find the any write in between
+	while (idx2 != string::npos)
+	{
+		token = pst.substr(idx1, idx2 - idx1);
+		//cout<<token<<endl;
+		if(token.find("write") != string::npos)
+		{
+			if (CHECK_PARAMS && token.find("/etc/passwd"))
+			{
+				if ((stages[1] == -1) || (stages[1] > stages[2]) || (stages[1] <stages[0]))  { stages[1] = line; } // break while if one write after open before close is found
+			}
+			else
+			{
+				if ((stages[1] == -1) || (stages[1] > stages[2]) || (stages[1] <stages[0])) { stages[1] = line; } // break while if one write  after open before close is found
+			}
+		}
+		idx1 = idx2 + 1;
+		idx2 = pst.find ("\n", idx1);
+		line++;
+	}
+	
+	/*
+	int idx1 = 0;
+	int idx2 = pst.find (" ", idx1);
+	int idx3 = pst.find ("\n", idx1);
+	if ( (idx3 < idx2) && (idx3 != string::npos) )
+		idx2 = idx3;
+	
+	string token, p_token;
+	int tcount = 0;
+	while (idx2 != string::npos)
+	{
+		token = pst.substr(idx1, idx2 - idx1);
+		if (token != "")
+		{
+			tcount++;
+			//cout<<"tk>"<<token<<"<"<<endl;
+			if (token.find("/etc/passwd") != string::npos)
+			{ // attack syscall
+			
+				if ( (p_token == "open" ) && (stages[0] == -1) ) stages[0] = tcount;
+				if ( (p_token == "write") && (stages[1] == -1) ) stages[1] = tcount; 
+				if ( (p_token == "close") && (stages[2] == -1) ) stages[2] = tcount;
+			}
+			else
+			{
+				if (token.find("buffer") == string::npos) (*length)++; // it is a system call name
+			}
+		}
+		idx1 = idx2 + 1;
+		idx2 = pst.find (" ", idx1);
+		idx3 = pst.find ("\n", idx1);
+		if ( (idx3 < idx2) && (idx3 != string::npos) )
+			idx2 = idx3;
+		p_token = token;
+	}
+	*/
 	// we have the location of attack commands
 	
 	score = 0;
@@ -3244,10 +3425,7 @@ void Population::updatePDF(int ind)
  void Population::pareto_rank2()
  {
 	// implemented from Deb's NSGA2 paper
-	// Setting the size to POP_SIZE constant.
-	// Had issues with the below line with the modern
-	// C++ (on Mac 10.10)
-	vector<int> S[POP_SIZE]; //Set of solutions dominated by i
+	vector<int> S[popsize]; //Set of solutions dominated by i
 	vector<int> Front; //Current front
 	vector<int> Q; // Next front
 	int N[popsize]; //domination counter

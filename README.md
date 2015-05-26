@@ -67,5 +67,3 @@ Changes in reporting, now anomaly rate without preamlbe is also reported.
 * x.8 Supports the additional detector pH (which is under source/myPH)
 
 * x.9 pHmr experiments were not producing correct results, that is fixed. Now pHmr has one fitness function
-
-The recent C++ compilers complained about array allocation. At the moment, population size is fixed to 500. Should not be an issue since 500 worked reasonably fine.
