@@ -76,9 +76,11 @@ int line_count(string filename)
 void send_message(string message, int priority)
 {
 	if (DebugLevel >= priority)
+	{
 		if (priority == 0) cout<<" [ X ] "<<message<<endl;
 		else if (priority == 1) cout<<" [ ? ] "<<message<<endl;
-		else cout<<" [ i ] "<<message<<endl; 
+		else cout<<" [ i ] "<<message<<endl;
+	}
 };
 
 /********************************************************************************

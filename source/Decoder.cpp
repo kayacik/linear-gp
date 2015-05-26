@@ -295,7 +295,7 @@ BYTE4 Decoder::random_instruction(ProbabilityDistro *pd)
 
 /***********************************************************************************
  * create an instruction with random parameters
- * the ordering is from the instruction list (i.e. params/*.inst)
+ * the ordering is from the instruction list (i.e. params / *.inst)
  * 1st line is the 0 element
  */
 BYTE4 Decoder::specific_instruction(int number)
@@ -329,7 +329,7 @@ BYTE4 Decoder::specific_instruction(int number)
 
 /***********************************************************************************
  * create an instruction with random parameters
- * the ordering is from the instruction list (i.e. params/*.inst)
+ * the ordering is from the instruction list (i.e. params / *.inst)
  * 1st line is the 0 element
  */
 BYTE4 Decoder::specific_instruction(int number, int param1, int param2)
