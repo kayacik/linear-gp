@@ -31,6 +31,7 @@
 #include <float.h>
 #include <vector>
 #include <iomanip>
+#include <cstring>
 #include "Parameters.hpp"
 #include "Decoder.hpp"
 #include "Functions.hpp"

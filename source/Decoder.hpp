@@ -29,6 +29,7 @@
 #include <sstream>
 #include <ctype.h>
 #include <vector>
+#include <algorithm>
 #include "Lists.hpp"
 #include "Functions.hpp"
 #include "Parameters.hpp"
